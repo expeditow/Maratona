@@ -1,0 +1,13 @@
+vetor ordenado
+
+i = 0, j = n - 1;
+
+if ( v[i] + v[j] ) < valorProcurado
+j--
+
+if( v[i] + v[j] ) > valor
+
+i++
+
+é uma operação linear
+

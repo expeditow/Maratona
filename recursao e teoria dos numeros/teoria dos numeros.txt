@@ -1,0 +1,102 @@
+mdc de dois números - euclides extendido
+
+a / b = Q + R
+
+a = Q*b + R
+
+a - Q*b = R
+
+
+Um coeficiente binomial C(n, k) também fornece o número de maneiras, desconsiderando a ordem,
+que k objetos podem ser escolhidos entre n objetos.
+Mais formalmente, o número de subconjuntos de elementos k (ou combinações k) de um elemento n definir.
+
+
+Um coeficiente binomial C(n, k) pode ser definido como o coeficiente de x^k na expansão de (1 + x)^n.
+
+
+basicamente as permutações
+
+int binomialCoeff(int n, int k)
+{
+    // Base Cases
+    if (k > n)
+        return 0;
+    if (k == 0 || k == n)
+        return 1;
+ 
+    // Recur
+    return binomialCoeff(n - 1, k - 1)
+           + binomialCoeff(n - 1, k);
+}
+
+Os números catalães são definidos como uma sequência matemática que consiste em
+números inteiros positivos, que podem ser usados ​​para encontrar o número de possibilidades de várias combinações. 
+
+meio que a qntd de subconjuntos de um conjunto, algo relacionado a isso
+
+unsigned long int catalan(unsigned int n)
+{
+    // Base case
+    if (n <= 1)
+        return 1;
+ 
+    // catalan(n) is sum of
+    // catalan(i)*catalan(n-i-1)
+    unsigned long int res = 0;
+    for (int i = 0; i < n; i++)
+        res += catalan(i) * catalan(n - i - 1);
+ 
+    return res;
+}
+
+em 0(n)
+
+{
+    unsigned long int res = 1;
+ 
+    // Since C(n, k) = C(n, n-k)
+    if (k > n - k)
+        k = n - k;
+ 
+    // Calculate value of [n*(n-1)*---*(n-k+1)] /
+    // [k*(k-1)*---*1]
+    for (int i = 0; i < k; ++i) {
+        res *= (n - i);
+        res /= (i + 1);
+    }
+ 
+    return res;
+}
+ 
+// A Binomial coefficient based function to find nth catalan
+// number in O(n) time
+unsigned long int catalan(unsigned int n)
+{
+    // Calculate value of 2nCn
+    unsigned long int c = binomialCoeff(2 * n, n);
+ 
+    // return 2nCn/(n+1)
+    return c / (n + 1);
+}
+ 
+
+
+Lema de Euclides
+
+Recebemos dois números x e y. Sabemos que um número p divide seu produto.
+Podemos dizer com certeza que p também divide um deles?
+
+A resposta é não. Por exemplo, considere x = 15, y = 6 e p = 9. p divide o produto 15*6, mas não divide nenhum deles.
+
+E se p for primo?
+O lema de Euclides afirma que se um primo p divide o produto de dois números (x*y),
+ele deve dividir pelo menos um desses números.
+
+Por exemplo x = 15, y = 6 e p = 5. p divide o produto 15*6, também divide 15.
+
+A ideia é simples, como p é primo, não pode ser fatorado. Portanto, deve estar completamente presente em x ou em y.
+
+Generalização do lema de Euclides:
+Se p divide x*y e p é relativamente primo de x, então p deve dividir y. No exemplo acima,
+5 é relativamente primo de 6, portanto deve dividir 15.
