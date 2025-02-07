@@ -1,43 +1,46 @@
-#include <bits/stdc++.h>
-
+#include "bits/stdc++.h"
+ 
 using namespace std;
+ 
+#define forn(i,n) for (int i = 0 ; i < n; i++)
+ 
+using ll = long long;
+using f64 = double;
+using ii = pair<int , int>;
+using ull = unsigned long long;
+using vi = vector<int>;
+using vii = vector<ii>;
+ 
+const string ENDL = "\n";
+ 
+void solve(){
+ 
+    ll n, k; cin >> n >> k;
+    vector<ll> v(k);
+ 
+    for(int i = 0; i < k; i++) cin >> v[i];
+ 
+    sort(v.begin(), v.end());
+ 
+    ll g = 0, w = 0, r = 0;
+    ll ind = k-1;
+ 
+    while(g < n && ind >= 0){
+ 
+        r = n - v[ind];
+        ind--;
+        g += r;
+        w++;
 
-void solve();
-
-int main()
-{
-    int t; cin >> t;
-
-    while(t--) solve();
-
-    return 0;
+        if(v[ind] <= g) break;
+    }
+ 
+    cout << w << endl;
 }
-
-void solve()
-{
-    int n; cin >> n;
-    int aux = 0, resp = 0;
-
-    for(int i = 2 ; i <= n; i++)
-    {
-        int sum = 0;
-        int x = 1;
-
-        do
-        {
-            sum += + i*x;
-
-            x++;
-        } 
-        while(i*x <= n);
-        
-
-        if(sum > aux)
-        {
-            aux = sum;
-            resp = i;
-        }
-    }       
-
-    cout << resp << endl;
+int main(){
+    ios_base :: sync_with_stdio(false);
+    cin.tie(0);
+    int t = 1; cin >> t;
+    while(t--) solve();
+    return 0;
 }
